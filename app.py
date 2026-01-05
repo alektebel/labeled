@@ -7,8 +7,10 @@ import json
 import os
 from typing import Dict, List, Optional
 
+import os
+
 app = Flask(__name__)
-app.secret_key = 'dev-secret-key-change-in-production'
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Import classes from the labeling algorithm
 class User:
@@ -160,15 +162,18 @@ class LabelingSystem:
             self.user_labels[user_id] = []
         self.user_labels[user_id].append(item_id)
         
-        # Update user statistics (increment total labels)
+        # Update user statistics
+        # Note: We don't use user.update_label_stats() because that requires ground truth
+        # (whether the label is correct). Instead, we track labeling activity and build
+        # expertise gradually as users label more items in each category.
         user.total_labels += 1
         if category not in user.labels_by_category:
             user.labels_by_category[category] = 0
             user.expertise_by_category[category] = 0.5  # Start with 50% expertise
         user.labels_by_category[category] += 1
-        # Gradually increase expertise as user labels more items in this category
+        # Gradually increase expertise as user labels more items in this category (max 95%)
         user.expertise_by_category[category] = min(
-            1.0,
+            0.95,
             user.expertise_by_category[category] + 0.05
         )
         
