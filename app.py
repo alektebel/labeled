@@ -7,8 +7,6 @@ import json
 import os
 from typing import Dict, List, Optional
 
-import os
-
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
