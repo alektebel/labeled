@@ -25,12 +25,18 @@ The labeling algorithm is implemented in `labeling_algorithm.ipynb` and includes
 pip install -r requirements.txt
 ```
 
-2. Run the Flask application:
+2. (Optional) Set environment variables for configuration:
+```bash
+export SECRET_KEY="your-secret-key-here"  # For session security
+export FLASK_DEBUG="true"  # Enable debug mode (development only)
+```
+
+3. Run the Flask application:
 ```bash
 python app.py
 ```
 
-3. Open your browser to `http://localhost:5000`
+4. Open your browser to `http://localhost:5000`
 
 ## Usage
 

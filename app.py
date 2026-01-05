@@ -224,6 +224,9 @@ def index():
 def login():
     """Simple login endpoint"""
     data = request.json
+    if not data:
+        return jsonify({'success': False, 'error': 'Invalid request'}), 400
+    
     user_id = data.get('user_id')
     
     if user_id in labeling_system.users:
@@ -272,6 +275,9 @@ def submit_label():
         return jsonify({'error': 'Not logged in'}), 401
     
     data = request.json
+    if not data:
+        return jsonify({'error': 'Invalid request'}), 400
+    
     item_id = data.get('item_id')
     label = data.get('label')
     
@@ -293,4 +299,6 @@ def list_users():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use environment variable to control debug mode (default to False for security)
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
