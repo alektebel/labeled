@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labeled - Decentralized Data Labeling Platform</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="login-section" class="section">
+            <h1>Labeled</h1>
+            <p class="subtitle">Decentralized Data Labeling Platform</p>
+            <div class="login-form">
+                <h2>Select User</h2>
+                <select id="user-select">
+                    <option value="">-- Select a user --</option>
+                </select>
+                <button id="login-btn" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+
+        <!-- Main Labeling Section -->
+        <div id="labeling-section" class="section hidden">
+            <!-- User Info Bar -->
+            <div class="user-info-bar">
+                <div class="user-info">
+                    <h3 id="user-name">User</h3>
+                    <div class="stats">
+                        <span>Labels: <strong id="total-labels">0</strong></span>
+                        <span>Accuracy: <strong id="accuracy">0%</strong></span>
+                    </div>
+                </div>
+                <button id="logout-btn" class="btn btn-secondary">Logout</button>
+            </div>
+
+            <!-- Labeling Card -->
+            <div class="labeling-card">
+                <div id="no-items" class="message hidden">
+                    <h2>🎉 All Done!</h2>
+                    <p>You've labeled all available items.</p>
+                </div>
+
+                <div id="item-container">
+                    <!-- Binary Classification (Swipe Interface) -->
+                    <div id="binary-interface" class="hidden">
+                        <div class="card">
+                            <img id="item-image-binary" src="" alt="Item to label">
+                            <div class="card-info">
+                                <p id="binary-question">Is this an animal?</p>
+                            </div>
+                        </div>
+                        <div class="swipe-buttons">
+                            <button class="btn btn-no" id="swipe-left">
+                                <span class="icon">✕</span>
+                                <span>No</span>
+                            </button>
+                            <button class="btn btn-yes" id="swipe-right">
+                                <span class="icon">✓</span>
+                                <span>Yes</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Multiclass Classification -->
+                    <div id="multiclass-interface" class="hidden">
+                        <div class="card">
+                            <img id="item-image-multi" src="" alt="Item to label">
+                            <div class="card-info">
+                                <p>What is this?</p>
+                            </div>
+                        </div>
+                        <div class="category-buttons" id="category-buttons">
+                            <!-- Buttons will be dynamically added -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Expertise Section -->
+            <div class="expertise-section">
+                <h3>Your Expertise</h3>
+                <div id="expertise-list" class="expertise-list">
+                    <p class="text-muted">Start labeling to build your expertise!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
