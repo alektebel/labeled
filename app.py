@@ -160,6 +160,18 @@ class LabelingSystem:
             self.user_labels[user_id] = []
         self.user_labels[user_id].append(item_id)
         
+        # Update user statistics (increment total labels)
+        user.total_labels += 1
+        if category not in user.labels_by_category:
+            user.labels_by_category[category] = 0
+            user.expertise_by_category[category] = 0.5  # Start with 50% expertise
+        user.labels_by_category[category] += 1
+        # Gradually increase expertise as user labels more items in this category
+        user.expertise_by_category[category] = min(
+            1.0,
+            user.expertise_by_category[category] + 0.05
+        )
+        
         return True
     
     def get_user_stats(self, user_id: str) -> Optional[Dict]:
